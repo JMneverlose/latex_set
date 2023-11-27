@@ -1,0 +1,193 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb, amsbsy, dsfont}
+\usepackage{mathtools, physics, breqn, cancel}
+\usepackage{dhucs}
+\usepackage[nodisplayskipstretch]{setspace}
+\doublespacing
+\everydisplay\expandafter{\the\everydisplay\setstretch{0.7}}
+\numberwithin{equation}{section}
+\setstretch{1.5}
+\title{PLA 15}
+\author{물리학과 2017160111 Ahn Jin mo}
+\usepackage{graphicx}
+\date{}
+\def\arraystretch{2}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\newcommand{\dint}{\displaystyle\int}
+\newcommand{\bs}{\boldsymbol}
+\allowdisplaybreaks
+\begin{document}
+    \maketitle
+    \section{}
+    \subsection{}
+    $\{\ket{\phi_i}\}$ basis에서 $H, \rho$의 matrix representation은 다음과 같다.
+    \begin{equation}
+        H = 
+        \begin{pmatrix}
+            \hbar \omega_1 & \hbar \Omega^* \cos(\omega t) \\
+            \hbar \Omega \cos(\omega t) & \hbar \omega_2
+        \end{pmatrix}, \quad \text{and} \quad
+        \rho = 
+        \begin{pmatrix}
+            \rho_{11} & \rho_{12} \\ \rho_{21} & \rho_{22}
+        \end{pmatrix}.
+    \end{equation}
+    이를 이용해서 $\dot{\rho}$를 구하면 되며 그 결과는 다음과 같다.
+    \begin{equation}
+        \dot{\rho} = -\dfrac{i}{\hbar}[H ,\rho] = 
+        \begin{pmatrix}
+            i(\Omega\rho_{12} - \Omega^* \rho_{21})\cos(\omega t) & -i[ -\rho_{12}\omega_0 + (\rho_{22} - \rho_{11})\Omega^* \cos(\omega t)]\\
+            -i[\rho_{21}\omega_0 + (\rho_{11} - \rho_{22})\Omega \cos(\omega t)] & i(\Omega^* \rho_{21} - \Omega \rho_{12})\cos(\omega t)
+        \end{pmatrix}.
+    \end{equation}
+    이로부터 $\dot{\rho}_{ij}$를 알 수 있으며 $\dot{\rho}_{11} = -\dot{\rho}_{22}$와 $\dot{\rho}_{12} = \dot{\rho}_{21}^*$임을 알 수 있다.
+
+    \subsection{}
+    $\rho$의 off-diagonal term들은 $\sigma$에 대해서 다음과 같이 표현된다.
+    \begin{equation}
+        \rho_{12} = e^{i\omega_0 t} \sigma_{12} \quad \text{and} \quad \rho_{21} = e^{-i\omega_0 t}\sigma_{21}.
+    \end{equation}
+    또한 $\sigma_{11} = \rho_{11}, \sigma_{22} = \rho_{22}$이다. 이를 이용해서 계산하면 된다. 우선 $\dot{\sigma}_{22}$는 다음과 같다.
+    \begin{eqnarray}
+        \dot{\sigma}_{22} &=& \dot{\rho}_{22} = i\Omega^* \cos(\omega t)\rho_{21} - i\Omega \cos(\omega t) \rho_{12}, \\[1ex]
+        &=& i \Omega^* \cos(\omega t) e^{-i\omega_0 t}\sigma_{21} - i\Omega \cos(\omega t) e^{i\omega_0 t} \sigma_{12}, \\[1ex]
+        &\approx & \dfrac{i}{2}\left[ \Omega^* e^{i\Delta \omega t}\sigma_{21} - \Omega e^{-i\Delta \omega t}\sigma_{12}\right] \quad (\because \text{Rotating wave approximation}).
+    \end{eqnarray}
+    그리고 $\dot{\sigma}_{21}$은 다음과 같다.
+    \begin{eqnarray}
+        \dot{\sigma}_{21} &=& \dot{\rho}_{21}e^{i\omega_0 t} + i\omega_0 \rho_{21}e^{i\omega_0 t}, \\[1ex]
+        &=& i\Omega \cos(\omega t) (\sigma_{22} - \sigma_{11})e^{i\omega_0 t},\\[1ex]
+        &=& \dfrac{i}{2}\Omega (\sigma_{22} - \sigma_{11})e^{-i\Delta \omega t} \quad (\because \text{Rotating wave approximation}).
+    \end{eqnarray}
+    $\sigma_{ij}$의 정의로부터 $\dot{\sigma}_{11} = -\dot{\sigma}_{22}$와 $\dot{\sigma}_{12} = \dot{\sigma}_{21}^*$가 성립함을 쉽게 알 수 있다.
+
+    \subsection{}
+    \begin{eqnarray}
+        \dot{\eta}_{22} &=& \dot{\sigma}_{22} = \dfrac{i}{2}\Omega^* \eta_{21} - \dfrac{i}{2}\Omega \eta_{12}, \\[1ex]
+        \dot{\eta}_{21} &=& i\Delta \omega \eta_{21} + e^{i\Delta \omega t}\dot{\sigma}_{21} = i\Delta \omega \eta_{21} + \dfrac{i}{2}\Omega (\eta_{22} - \eta_{11}).
+    \end{eqnarray}
+    마찬가지로 $\eta_{ij}$의 정의로부터 $\dot{\eta}_{11} = -\dot{\eta}_{22}$와 $\dot{\eta}_{12} = \dot{\eta}_{21}^*$가 성립함을 쉽게 알 수 있다.
+
+    \subsection{}
+    Eqs. (1.10--11)은 Bloch vector
+    \begin{equation}
+        x \equiv \eta_{12} + \eta_{21}, \quad y \equiv i(\eta_{12} - \eta_{21}) \quad \text{and} \quad z \equiv \eta_{11} - \eta_{22}
+    \end{equation}
+    를 도입하면 Bloch vector의 precession에 대한 방정식으로 표현된다. 정확히는 다음과 같은 방정식으로 표현된다.
+    \begin{equation}
+        \dot{x} = -\Delta \omega y, \quad \dot{y} = \Delta\omega x - \Omega z \quad \text{and} \quad \dot{z} = \Omega y.
+    \end{equation}
+    Mathematica를 이용하면 문제에서 주어진 초기조건에 대해 $z(t)$는 다음과 같다.
+    \begin{equation}
+        z(t) = \eta_{11} - \eta_{22} = \dfrac{\Delta \omega^2}{Z^2} + \dfrac{\Omega^2}{Z^2}\cos(Zt).
+    \end{equation}
+    $\eta_{11} + \eta_{22} = 1$이므로
+    \begin{equation}
+        \eta_{22} = \dfrac{1}{2}(1-z(t))
+    \end{equation}
+    이다. 이때, 다음과 같다.
+    \begin{equation}
+        1- z(t) = \dfrac{Z^2 - \Delta\omega^2 - \Omega^2 \cos(Zt)}{Z^2} = \dfrac{\Omega^2}{Z^2}(1- \cos(Zt)).
+    \end{equation}
+    Trigonometric identity를 이용하면 다음과 같다.
+    \begin{equation}
+        \eta_{22} = \dfrac{1}{2}(1- z(t)) = \dfrac{\Omega^2}{Z^2}\dfrac{1- \cos(Zt)}{2} = \dfrac{\Omega^2}{Z^2}\sin^2\left( \dfrac{1}{2}Zt\right).
+    \end{equation}
+    Here, $\Omega$ is assumed to be real.
+
+    \section{}
+    \subsection{}
+    $\{ \tilde{\Gamma}, \rho \}$를 계산하면 다음과 같다.
+    \begin{equation}
+        \{ \tilde{\Gamma}, \rho \} = 
+        \begin{pmatrix}
+            0 & \Gamma \rho_{12} \\ \Gamma \rho_{21} & 2\Gamma \rho_{22}
+        \end{pmatrix}.
+    \end{equation}
+    이 또한 Hermitian matrix이다. 이렇게 계산한 $\dot{\rho}$는 다음과 같다.
+    \begin{equation}
+        \dot{\rho} = -\dfrac{i}{\hbar}[H, \rho] - \dfrac{1}{2}\{ \tilde{\Gamma}, \rho \} =
+        \begin{pmatrix}
+            i(\Omega\rho_{12} - \Omega^* \rho_{21})\cos(\omega t) & -i[ -\rho_{12}\omega_0 + (\rho_{22} - \rho_{11})\Omega^* \cos(\omega t)] - \Gamma \rho_{12}/2\\
+            -i[\rho_{21}\omega_0 + (\rho_{11} - \rho_{22})\Omega \cos(\omega t)]-\Gamma \rho_{21}/2 & i(\Omega^* \rho_{21} - \Omega \rho_{12})\cos(\omega t) - \Gamma \rho_{22}
+        \end{pmatrix}.
+    \end{equation}
+    우선 $\dot{\eta}_{22}$에 대한 방정식은 다음과 같은 과정으로 구할 수 있다.
+    \begin{eqnarray}
+        \dot{\sigma}_{22} &=& \dot{\rho}_{22} = i(\Omega^* \rho_{21} - \Omega \rho_{12})\cos(\omega t) - \Gamma \rho_{22},\\[1ex]
+        &\approx & \dfrac{i}{2}( \Omega^* e^{i\Delta\omega t}\sigma_{21} - \Omega e^{-i\Delta \omega t}\sigma_{12})- \Gamma \sigma_{22},\\[1ex]
+        \dot{\eta}_{22}&=& \dot{\sigma}_{22} = \dfrac{i}{2}(\Omega^* \eta_{21} - \Omega \eta_{12})- \Gamma \eta_{22}.
+    \end{eqnarray}
+    그리고 $\dot{\eta}_{21}$은 다음과 같은 과정으로 구할 수 있다.
+    \begin{eqnarray}
+        \dot{\sigma}_{21} &=& \dot{\rho}_{21} e^{i\omega_0 t} + i\omega_0 \sigma_{21},\\[1ex]
+        &=& -i [\omega_0 \sigma_{21} + (\sigma_{11} - \sigma_{22})\Omega \cos(\omega t)e^{i\omega_0 t}]- \Gamma \sigma_{21}/2 + i\omega_0 \sigma_{21},\\[1ex]
+        &\approx & -\dfrac{i}{2}(\sigma_{11} - \sigma_{22})\Omega e^{-i\Delta\omega t}- \Gamma \sigma_{21}/2,\\[1ex]
+        \dot{\eta}_{21} &=& \dot{\sigma}_{21}e^{i\Delta \omega t}+ i\Delta\omega \eta_{21},\\[1ex]
+        &=& -\dfrac{i}{2}(\eta_{11} - \eta_{22})\Omega - \Gamma \eta_{21}/2 + i\Delta\omega \eta_{21}.
+    \end{eqnarray}
+    Eq. (2.1)에서 확인했듯이 modified $\dot{\rho}$는 eq. (1.2)와 마찬가지로 Hermitian matrix이다. 따라서 계산의 형태는 조금 달라질지라도
+    구체적인 구조는 변화하지 않는다. 따라서 $\dot{\eta}_{11} = -\dot{\eta}_{22}$와 $\dot{\eta}_{12} = \dot{\eta}_{21}^*$가 성립함을 쉽게 알 수 있다.
+
+    \subsection{}
+    Steady state solution은 $\dot{eta}_{ij} = 0$으로 놓고 구하면 된다. 따라서 다음 방정식을 구하면 된다.
+    \begin{eqnarray}
+        \dfrac{1}{2}i\Omega^* \eta_{21} - \dfrac{1}{2}i\Omega \eta_{12} - \Gamma \eta_{22} &=& 0,\\[1ex]
+        i\Delta \omega \eta_{21} + \dfrac{1}{2}i \Omega (\eta_{22} - \eta_{11})- \dfrac{1}{2}\Gamma \eta_{21} &=&0.
+    \end{eqnarray}
+    여기서 $\eta_{11} + \eta_{22} = 1$이므로 eq. (2.12)는 다음과 같이 쓸 수 있다.
+    \begin{equation}
+        i\Delta \omega \eta_{21} + \dfrac{1}{2}i \Omega (2\eta_{22}-1)- \dfrac{1}{2}\Gamma \eta_{21} =0.
+    \end{equation}
+    Mathematica에 의하면 eqs. (2.11--13)의 해는 다음과 같다.
+    \begin{eqnarray}
+        \eta_{21} &=& \dfrac{(2\Delta\omega - i\Gamma)\Omega}{\Gamma^2 + 4\Delta\omega^2 + 2|\Omega|^2} = \dfrac{1}{2}\dfrac{(\Delta\omega - i\Gamma/2)\Omega}{\Delta\omega^2 + \Gamma^2/4 + |\Omega|^2/2},\\[1ex]
+        \eta_{22} &=& \dfrac{|\Omega|^2}{\Gamma^2 + 4\Delta\omega^2 + 2|\Omega|^2} = \dfrac{1}{2}\dfrac{|\Omega|^2/2}{\Delta\omega^2 + \Gamma^2/4 + |\Omega|^2/2}.
+    \end{eqnarray}
+
+    \subsection{}
+    \subsubsection{}
+    $E = E_0 \cos(\omega t)$일 때 time averaged energy density는 다음과 같다.
+    \begin{equation}
+        \expval{u} = \dfrac{1}{2}\epsilon_0 |E_0|^2.
+    \end{equation}
+    따라서 time averaged intensity는 다음과 같다.
+    \begin{equation}
+        \expval{I} = uc = \dfrac{1}{2}\epsilon_0 c |E_0|^2.
+    \end{equation}
+    Eq. (2.15)로부터 다음과 같다.
+    \begin{eqnarray}
+        \dfrac{1}{2}\dfrac{|\Omega|^2/2}{\Delta\omega^2 + \Gamma^2/4 + |\Omega|^2/2} &=& \dfrac{1}{4} \quad \Rightarrow \quad |\Omega|^2 \approx \dfrac{\Gamma^2}{2} = \dfrac{|\mel{\phi_2}{p}{\phi_1}|^2}{\hbar^2}|E_0|^2 \quad (Near resonance),\\[1ex]
+        |E_0|^2 &=& \dfrac{\hbar^2 \Gamma^2}{2}\dfrac{1}{|\mel{\phi_2}{p}{\phi_1}|^2},\\[1ex]
+        I_s &=& \dfrac{1}{2}\epsilon_0 c |E_0|^2 = \dfrac{\hbar^2 \epsilon_0 c}{4}\dfrac{\Gamma^2}{|\mel{\phi_2}{p}{\phi_1}|^2}.
+    \end{eqnarray}
+
+    \subsubsection{}
+    \begin{eqnarray}
+        |\mel{\phi_2}{\mathbf{p}}{\phi_1}|^2 &=& \dfrac{3\pi \epsilon_0 \hbar c^3}{\omega_0^3}\Gamma,\\[1ex]
+        \therefore I_s &=& \dfrac{\hbar^2 \epsilon_0 c}{4}\cdot \Gamma^2 \cdot \dfrac{\omega_0^3}{3\pi \epsilon_0 \hbar c^3 \Gamma} = \dfrac{\hbar \omega_0^3}{12\pi c^2}\Gamma.
+    \end{eqnarray}
+
+    \subsubsection{}
+    주어진 값들을 대입하면 $I_s \approx 17.56$ W/m$^2$이다.
+
+    \subsection{}
+    Electric dipole momentum operator $p$의 expectation value는 다음과 같다. 여기서, 우리는 transition이 일어나는 상황에만 관심이 있다. 따라서
+    $\mel{\phi_1}{p}{\phi_1} = \mel{\phi_2}{p}{\phi_2} = 0$인 상황만 살펴보도록 한다.
+    \begin{eqnarray}
+        \expval{p} &=& \mel{\phi_1}{\rho p}{\phi_1} + \mel{\phi_2}{\rho p}{\phi_2},\\[1ex]
+        &=& a_1 \mel{\Psi}{p}{\phi_1} + a_2 \mel{\Psi}{p}{\phi_2},\\[1ex]
+        &=& a_1 a_2^* \mel{\phi_2}{p}{\phi_1} + a_2a_1^* \mel{\phi_1}{p}{\phi_2} = \rho_{12}\mel{\phi_2}{p}{\phi_1} + \rho_{21}\mel{\phi_1}{p}{\phi_2},\\[1ex]
+        &=& \eta_{12}\mel{\phi_2}{p}{\phi_1}e^{i\omega t} + \eta_{21}\mel{\phi_1}{p}{\phi_2}e^{-i\omega t},\\[1ex]
+        &=& \dfrac{1}{2}\dfrac{(\Delta \omega - i\Gamma/2)\mel{\phi_1}{p}{\phi_2}}{\Delta\omega^2 + \Gamma^2/4 + |\Omega|^2/2} \Omega e^{-i\omega t} + \dfrac{1}{2}\dfrac{(\Delta\omega + i\Gamma/2)\mel{\phi_2}{p}{\phi_1}}{\Delta\omega^2 + \Gamma^2/4 + |\Omega|^2/2}\Omega^* e^{i\omega t}.
+    \end{eqnarray}
+    이때, Rabi frequency는
+    \begin{equation}
+        \Omega = \dfrac{\mel{\phi_2}{p}{\phi_1}}{\hbar}E_0
+    \end{equation}
+    로 주어졌으므로 이를 대입하면 다음과 같다.
+    \begin{equation}
+        \expval{p} = \dfrac{1}{2}\dfrac{(\Delta\omega - i\Gamma/2)|\mel{\phi_2}{p}{\phi_1}|^2}{\Delta\omega^2 + \Gamma^2/4 + |\Omega|^2/2}E_0 e^{-i\omega t} + \dfrac{1}{2}\dfrac{(\Delta\omega + i\Gamma/2)|\mel{\phi_2}{p}{\phi_1}|^2}{\Delta\omega^2 + \Gamma^2/4 + |\Omega|^2/2}E_0 e^{i\omega t}.
+    \end{equation}
+    \end{document}
